@@ -6,7 +6,7 @@ import Game from "./components/game";
 
 export default function App() {
     return html`
-        <div style='margin: 0px; padding: 0px; width:100%;'>
+        <div style='height:100vh; width:100vw; font-family:Verdana; color:white; background-color:black'>
             <div style='display:flex; justify-content:space-even;'>
                 ${Timer()}
                 ${Gold()}
