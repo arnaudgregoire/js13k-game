@@ -35,8 +35,8 @@ function renderCanvas(ingredients, decorations){
 
 function getCoordinate(a,b,ratio){
     return{
-        x: a.x + (b.x - a.x) * ratio,
-        y: a.y + (b.y - a.y) * ratio
+        x: Math.floor(a.x + (b.x - a.x) * ratio),
+        y: Math.floor(a.y + (b.y - a.y) * ratio)
     }
 }
 
