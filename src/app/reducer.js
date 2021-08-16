@@ -49,7 +49,7 @@ export default function reducer(state = init, action, args) {
         const [keyCode] = args;
         let ingredient;
         Object.keys(INGREDIENTS).forEach(i => {
-            if (keyCode == INGREDIENTS[i].keyCode) {
+            if (keyCode == INGREDIENTS[i].key) {
                 ingredient = INGREDIENTS[i];
             }
         });

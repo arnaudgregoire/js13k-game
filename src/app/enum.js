@@ -1,19 +1,16 @@
 export const INGREDIENTS = {
     ABSINTHE: {
-        keyCode: 65,
-        key: 'A',
+        key: 'a',
         color: '#76b583',
         name: 'Absinthe'
     },
     BACARDI: {
-        keyCode: 66,
-        key: 'B',
+        key: 'b',
         color: '#9D702E',
         name: 'Bacardi'
     },
     Campari: {
-        keyCode: 67,
-        key: 'C',
+        key: 'c',
         color: '#B60000',
         name: 'Campari'
     }
