@@ -3,8 +3,7 @@ import html from "innerself/index";
 export default function Component(component, index) {
     return html`
         <li>
-            <p>name:${component}</p>
-            <p>index:${index}</p>
+            <img src="assets/${component}.png" style="height:300px; image-rendering: crisp-edges;">
         </li>
     `;
 }

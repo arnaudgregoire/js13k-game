@@ -6,9 +6,9 @@ import Component from "./component";
 function Game(state) {
     const { recipe, sentence, composition } = state;
     return html`
-        <div>
+        <div style='display:flex; justify-content:space-between;flex-flow:column;'>
             <h3>${sentence}</h3>
-            <ul>
+            <ul style="list-style-type:none; display:flex">
                 ${composition.map(Component)}
             </ul>
             ${Recipe(recipe)}

@@ -1,3 +1,5 @@
+import { CONTROLS } from "./enum";
+
 const init = {
     timer:"00:00",
     gold:0,
@@ -9,12 +11,6 @@ const init = {
         content:"2x Acanthe, 2x Qarus, 1x Fireweed"
     }
 };
-
-const controls = {
-    65: 'Acanthe',
-    66: 'Baethus',
-    67: 'Copea'
-}
 
 export default function reducer(state = init, action, args) {
     switch (action) {
@@ -50,7 +46,7 @@ export default function reducer(state = init, action, args) {
         case "KEY_PRESSED":{
             const {composition} = state;
             const [keyCode] = args;
-            const componentToAdd = controls[keyCode];
+            const componentToAdd = CONTROLS[keyCode];
             if(componentToAdd){
                 return Object.assign({}, state, {
                     composition: composition.concat(componentToAdd)
