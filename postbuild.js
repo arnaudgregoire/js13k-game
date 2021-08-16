@@ -43,4 +43,10 @@ archive.append(
   }
 )
 
+archive.append(
+  fs.createReadStream('./dist/assets/cocktail.png'), {
+    name: 'assets/cocktail.png'
+  }
+)
+
 archive.finalize()

@@ -1,14 +1,15 @@
 import App from './app/app';
 import { attach, dispatch } from './app/store';
-import { renderCanvas } from './app/canvas-manager';
+import CanvasManager from './app/canvas-manager';
 
 window.onload = () => {
     var root = document.querySelector('#root');
+    let canvasManager = new CanvasManager();
     root.addEventListener('render', function(event) {
         // event.detail is the state that was rendered.
         const { ingredients, decorations } = event.detail;
         if (ingredients) {
-            renderCanvas(ingredients, decorations);
+            canvasManager.renderCanvas(ingredients, decorations);
         }
     });
     attach(App, root);

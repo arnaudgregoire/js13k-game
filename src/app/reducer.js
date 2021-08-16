@@ -1,4 +1,4 @@
-import { INGREDIENTS } from './enum';
+import { INGREDIENTS, DECORATIONS } from './enum';
 
 const init = {
     timer: '00:00',
@@ -45,7 +45,7 @@ export default function reducer(state = init, action, args) {
         });
     }
     case 'KEY_PRESSED': {
-        const {ingredients} = state;
+        const {ingredients, decorations} = state;
         const [keyCode] = args;
         let ingredient;
         Object.keys(INGREDIENTS).forEach(i => {
@@ -56,6 +56,17 @@ export default function reducer(state = init, action, args) {
         if (ingredient) {
             return Object.assign({}, state, {
                 ingredients: [...ingredients, ingredient]
+            });
+        }
+        let decoration;
+        Object.keys(DECORATIONS).forEach(i => {
+            if (keyCode == DECORATIONS[i].key) {
+                decoration = DECORATIONS[i];
+            }
+        });
+        if (decoration) {
+            return Object.assign({}, state, {
+                decorations: [...decorations, decoration]
             });
         }
     }
