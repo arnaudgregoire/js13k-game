@@ -1,6 +1,5 @@
 const fs = require('fs')
 const archiver = require('archiver')
-const {INGREDIENTS} = require('./src/app/enum');
 
 let output = fs.createWriteStream('./build/build.zip')
 let archive = archiver('zip', {

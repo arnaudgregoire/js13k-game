@@ -1,18 +1,18 @@
 import App from './app/app';
-import { attach } from './app/store';
+import { attach, dispatch } from './app/store';
 import { renderCanvas } from './app/canvas-manager';
 
-var root = document.querySelector('#root');
-
-attach(App, root);
-
-root.addEventListener('render', function(event) {
-    // event.detail is the state that was rendered.
-    const { ingredients, decorations } = event.detail;
-    if (ingredients) {
-        renderCanvas(ingredients, decorations);
-    }
-});
+window.onload = () => {
+    var root = document.querySelector('#root');
+    root.addEventListener('render', function(event) {
+        // event.detail is the state that was rendered.
+        const { ingredients, decorations } = event.detail;
+        if (ingredients) {
+            renderCanvas(ingredients, decorations);
+        }
+    });
+    attach(App, root);
+}
 
 window.onkeypress = (evt) => {
     dispatch('KEY_PRESSED', evt.keyCode);
