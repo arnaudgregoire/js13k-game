@@ -1,0 +1,19 @@
+{
+    "env": {
+        "browser": true,
+        "es2017": true
+    },
+    "parserOptions": {
+        "sourceType": "module"
+    },
+    "rules": {
+        "semi": "error",
+        "indent": ["error", 4],
+        "quotes": ["error", "single"],
+        "comma-dangle": ["error", "never"],
+        "space-before-blocks": ["error", "always"],
+        "keyword-spacing": "error",
+        "key-spacing": "error",
+        "arrow-spacing": "error"
+    }
+}

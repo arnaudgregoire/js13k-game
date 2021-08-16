@@ -1,5 +1,5 @@
-import html from "innerself/index";
-import { connect } from "../store";
+import html from 'innerself/index';
+import { connect } from '../store';
 
 function Recipe(state) {
     const { recipe } = state;

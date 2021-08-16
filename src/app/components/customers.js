@@ -1,6 +1,6 @@
-import html from "innerself/index";
-import { connect } from "../store";
-import Customer from "./customer";
+import html from 'innerself/index';
+import { connect } from '../store';
+import Customer from './customer';
 
 function Customers(state) {
     const { customers } = state;

@@ -1,22 +1,20 @@
-const INGREDIENTS= {
-    ABSINTHE:{
+export const INGREDIENTS = {
+    ABSINTHE: {
         keyCode: 65,
-        key:'A',
+        key: 'A',
         color: '#76b583',
         name: 'Absinthe'
     },
-    BACARDI:{
+    BACARDI: {
         keyCode: 66,
-        key:'B',
+        key: 'B',
         color: '#9D702E',
         name: 'Bacardi'
     },
-    Campari:{
+    Campari: {
         keyCode: 67,
-        key:'C',
+        key: 'C',
         color: '#B60000',
         name: 'Campari'
     }
-}
-
-module.exports={INGREDIENTS};
+};

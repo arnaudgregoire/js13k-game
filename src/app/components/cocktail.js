@@ -1,6 +1,6 @@
-import html from "innerself/index";
-import { connect } from "../store";
-import Ingredient from "./ingredient";
+import html from 'innerself/index';
+import { connect } from '../store';
+import Ingredient from './ingredient';
 
 function Cocktail(state) {
     const { ingredients } = state;

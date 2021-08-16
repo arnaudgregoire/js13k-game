@@ -1,7 +1,7 @@
-import html from "innerself/index";
-import { connect } from "../store";
-import Recipe from "./recipe";
-import Cocktail from "./cocktail";
+import html from 'innerself/index';
+import { connect } from '../store';
+import Recipe from './recipe';
+import Cocktail from './cocktail';
 
 function Game(state) {
     const { recipe, sentence, cocktail } = state;

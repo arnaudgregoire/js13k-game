@@ -1,4 +1,4 @@
-import html from "innerself/index";
+import html from 'innerself/index';
 
 export default function Ingredient(ingredient, index) {
     return html`

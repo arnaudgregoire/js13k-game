@@ -1,9 +1,9 @@
-import html from "innerself/index";
-import Customers from "./components/customers";
-import Gold from "./components/gold";
-import Timer from "./components/timer";
-import Game from "./components/game";
-import Controls from "./components/controls";
+import html from 'innerself/index';
+import Customers from './components/customers';
+import Gold from './components/gold';
+import Timer from './components/timer';
+import Game from './components/game';
+import Controls from './components/controls';
 
 
 export default function App() {

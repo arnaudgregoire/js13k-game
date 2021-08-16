@@ -1,4 +1,4 @@
-import html from "innerself/index";
+import html from 'innerself/index';
 
 export default function Customer(customer, index) {
     return html`

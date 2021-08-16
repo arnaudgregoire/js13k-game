@@ -1,7 +1,6 @@
-import { createStore } from "innerself";
-import withLogger from "innerself/logger";
-import reducer from "./reducer"
-
+import { createStore } from 'innerself';
+import withLogger from 'innerself/logger';
+import reducer from './reducer';
 
 const { attach, connect, dispatch } =
     createStore(withLogger(reducer));

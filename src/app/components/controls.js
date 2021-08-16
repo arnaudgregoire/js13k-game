@@ -1,6 +1,6 @@
-import html from "innerself/index";
-import Control from "./control";
-import {INGREDIENTS} from "../enum";
+import html from 'innerself/index';
+import Control from './control';
+import {INGREDIENTS} from '../enum';
 
 function Controls() {
     return html`
