@@ -1,6 +1,6 @@
 const fs = require('fs')
 const archiver = require('archiver')
-const {CONTROLS} = require('./src/app/enum');
+const {INGREDIENTS} = require('./src/app/enum');
 
 let output = fs.createWriteStream('./build/build.zip')
 let archive = archiver('zip', {
@@ -43,15 +43,5 @@ archive.append(
     name: 'index.js'
   }
 )
-
-Object.values(CONTROLS).forEach(asset=>{
-  archive.append(
-    fs.createReadStream(`./dist/assets/${asset}.png`), {
-      name: `assets/${asset}.png`
-    }
-  )
-});
-
-
 
 archive.finalize()

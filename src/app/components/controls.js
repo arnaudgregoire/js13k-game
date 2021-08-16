@@ -1,13 +1,13 @@
 import html from "innerself/index";
 import Control from "./control";
-import {CONTROLS} from "../enum";
+import {INGREDIENTS} from "../enum";
 
 function Controls() {
     return html`
     <div>
         <h2>Controls</h2>
         <ul>
-            ${Object.values(CONTROLS).map(Control)}
+            ${Object.keys(INGREDIENTS).map(Control)}
         </ul>
     </div>
     `;

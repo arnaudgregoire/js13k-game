@@ -1,16 +1,14 @@
 import html from "innerself/index";
 import { connect } from "../store";
 import Recipe from "./recipe";
-import Component from "./component";
+import Cocktail from "./cocktail";
 
 function Game(state) {
-    const { recipe, sentence, composition } = state;
+    const { recipe, sentence, cocktail } = state;
     return html`
         <div style='display:flex; justify-content:space-between;flex-flow:column;'>
             <h3>${sentence}</h3>
-            <ul style="list-style-type:none; display:flex">
-                ${composition.map(Component)}
-            </ul>
+            ${Cocktail(cocktail)}
             ${Recipe(recipe)}
         </div>
     `;

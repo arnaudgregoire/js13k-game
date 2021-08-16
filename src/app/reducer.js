@@ -1,11 +1,12 @@
-import { CONTROLS } from "./enum";
+import { INGREDIENTS } from "./enum";
 
 const init = {
     timer:"00:00",
     gold:0,
     customers: [],
     sentence: "'a green Zoltan please, im thirsty'",
-    composition:[],
+    ingredients:[],
+    decorations:[],
     recipe:{
         title:"'The Green Zoltan'",
         content:"2x Acanthe, 2x Qarus, 1x Fireweed"
@@ -44,12 +45,17 @@ export default function reducer(state = init, action, args) {
             });
         }
         case "KEY_PRESSED":{
-            const {composition} = state;
+            const {ingredients} = state;
             const [keyCode] = args;
-            const componentToAdd = CONTROLS[keyCode];
-            if(componentToAdd){
+            let ingredient;
+            Object.keys(INGREDIENTS).forEach(i => {
+                if(keyCode == INGREDIENTS[i].keyCode){
+                    ingredient = INGREDIENTS[i];
+                }
+            });
+            if(ingredient){
                 return Object.assign({}, state, {
-                    composition: composition.concat(componentToAdd)
+                    ingredients: [...ingredients, ingredient]
                 });
             }
         }
