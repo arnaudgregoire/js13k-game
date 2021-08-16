@@ -15,7 +15,7 @@ window.onload = () => {
 }
 
 window.onkeypress = (evt) => {
-    dispatch('KEY_PRESSED', evt.keyCode);
+    dispatch('KEY_PRESSED', evt.key);
 };
 
 //setInterval(()=>{dispatch('CHANGE_TIMER', (Math.random()*100).toFixed(2))}, 1000);
