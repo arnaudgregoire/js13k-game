@@ -7,16 +7,32 @@ function renderCanvas(ingredients, decorations){
         let img = new Image();
         const marginX = 100;
         const marginY = 50;
+        const margin = {x:100, y:50};
+        const leftPoint = {x: 0, y:0};
+        const rightPoint = {x:76, y:0};
+        const bottomPoint = {x:38, y:38}; 
+
         img.onload=()=>{
-            ctx.drawImage(img, marginX, marginY);
+            ctx.drawImage(img, margin.x, margin.y);
             ctx.fillStyle = hexColor;
             ctx.beginPath();
-            ctx.moveTo(0 + marginX, 0 + marginY);
-            ctx.lineTo(38 + marginX, 38 + marginY);
-            ctx.lineTo(76 + marginX, 0 + marginY);
+            
+            let ratioLeftPoint = getCoordinate(bottomPoint, leftPoint, Math.min(1,ingredients.length * 0.1));
+            let ratioRightPoint = getCoordinate(bottomPoint, rightPoint, Math.min(1,ingredients.length * 0.1));
+
+            ctx.moveTo(ratioLeftPoint.x + margin.x, ratioLeftPoint.y + margin.y);
+            ctx.lineTo(bottomPoint.x + margin.x, bottomPoint.y + margin.y);
+            ctx.lineTo(ratioRightPoint.x + marginX, ratioRightPoint.y + marginY);
             ctx.fill();
         };
         img.src = 'assets/cocktail.png';
+    }
+}
+
+function getCoordinate(a,b,ratio){
+    return{
+        x: a.x + (b.x - a.x) * ratio,
+        y: a.y + (b.y - a.y) * ratio
     }
 }
 
