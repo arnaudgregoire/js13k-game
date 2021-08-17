@@ -44,8 +44,38 @@ archive.append(
 )
 
 archive.append(
-  fs.createReadStream('./dist/assets/cocktail.png'), {
-    name: 'assets/cocktail.png'
+  fs.createReadStream('./dist/assets/decorations/cherry.png'), {
+    name: 'assets/decorations/cherry.png'
+  }
+)
+
+archive.append(
+  fs.createReadStream('./dist/assets/decorations/lemon.png'), {
+    name: 'assets/decorations/lemon.png'
+  }
+)
+
+archive.append(
+  fs.createReadStream('./dist/assets/decorations/mint.png'), {
+    name: 'assets/decorations/mint.png'
+  }
+)
+
+archive.append(
+  fs.createReadStream('./dist/assets/decorations/skewer.png'), {
+    name: 'assets/decorations/skewer.png'
+  }
+)
+
+archive.append(
+  fs.createReadStream('./dist/assets/shapes/cocktail.png'), {
+    name: 'assets/shapes/cocktail.png'
+  }
+)
+
+archive.append(
+  fs.createReadStream('./dist/assets/shapes/standard.png'), {
+    name: 'assets/shapes/standard.png'
   }
 )
 

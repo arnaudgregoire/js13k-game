@@ -1,19 +1,19 @@
 import html from 'innerself/index';
 import Control from './control';
-import {INGREDIENTS, DECORATIONS} from '../enum';
+import { connect } from '../store';
 
-function Controls() {
+function Controls(state) {
+    const { phase } = state;
+    
     return html`
     <div>
         <h2>Controls</h2>
         <ul>
-            ${Object.keys(INGREDIENTS).map(Control)}
+            ${Object.keys(phase).map(Control)}
         </ul>
-        <ul>
-            ${Object.keys(DECORATIONS).map(Control)}
-        </ul>
+        Enter : Serve Cocktail
     </div>
     `;
 }
 
-export default Controls;
+export default connect(Controls);
