@@ -1,4 +1,4 @@
-import { INGREDIENTS, DECORATIONS, SHAPES } from './enum';
+import { INGREDIENTS, DECORATIONS, SHAPES, RECIPES } from './enum';
 
 const init = {
     timer: '00:00',
@@ -8,10 +8,7 @@ const init = {
     ingredients: [],
     decorations: [],
     shape:{},
-    recipe: {
-        title: '\'The Green Zoltan\'',
-        content: '2x Acanthe, 2x Qarus, 1x Fireweed'
-    },
+    recipe: RECIPES.BLUE_LAGOON,
     phase: SHAPES
 };
 
@@ -54,7 +51,8 @@ export default function reducer(state = init, action, args) {
                 ingredients: [],
                 decorations: [],
                 phase: SHAPES,
-                shape:{}
+                shape:{},
+                recipe: RECIPES[Object.keys(RECIPES)[Math.floor(Math.random() * Object.keys(RECIPES).length)]]
             });
         }
 

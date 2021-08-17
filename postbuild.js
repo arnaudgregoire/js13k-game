@@ -79,4 +79,10 @@ archive.append(
   }
 )
 
+archive.append(
+  fs.createReadStream('./dist/assets/shapes/balloon.png'), {
+    name: 'assets/shapes/balloon.png'
+  }
+)
+
 archive.finalize()

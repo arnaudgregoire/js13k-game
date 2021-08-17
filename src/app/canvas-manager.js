@@ -30,7 +30,7 @@ export default class CanvasManager{
         let glass = this.shapesImages.get(shape.id);
         if (canvas && glass) {
             let ctx = canvas.getContext('2d');
-            const margin = {x:canvas.width/2 - glass.width /2, y:50};
+            const margin = {x:Math.floor(canvas.width/2 - glass.width /2), y:Math.floor(canvas.height/2 -glass.height/3)};
             const topLeft = {x:0, y:0};
             const bottomRight = {x:shape.x, y:shape.y};
             const bottomLeft = {x:0, y:shape.y};
