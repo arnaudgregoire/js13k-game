@@ -1,4 +1,4 @@
-import { INGREDIENTS, DECORATIONS, SHAPES, RECIPES } from './enum';
+import { INGREDIENTS, DECORATIONS, SHAPES, RECIPES, CUSTOMERS } from './enum';
 
 const init = {
     timer: '00:00',
@@ -11,6 +11,16 @@ const init = {
     recipe: RECIPES.BLUE_LAGOON,
     phase: SHAPES
 };
+
+for (let i = 0; i < 8; i++) {
+    init.customers.push(
+        {
+            name:'random_name',
+            type:CUSTOMERS[Object.keys(CUSTOMERS)[Math.floor(Math.random() * Object.keys(CUSTOMERS).length)]]
+        }
+    );
+}
+
 
 export default function reducer(state = init, action, args) {
     switch (action) {
@@ -44,7 +54,7 @@ export default function reducer(state = init, action, args) {
         });
     }
     case 'KEY_PRESSED': {
-        const {ingredients, decorations, shape, phase} = state;
+        const {ingredients, decorations, phase} = state;
         const [key] = args;
         if(key == "Enter"){
             return Object.assign({}, state, {

@@ -85,4 +85,45 @@ archive.append(
   }
 )
 
+archive.append(
+  fs.createReadStream('./dist/assets/customers/crystal.png'), {
+    name: 'assets/customers/crystal.png'
+  }
+)
+archive.append(
+  fs.createReadStream('./dist/assets/customers/engi.png'), {
+    name: 'assets/customers/engi.png'
+  }
+)
+archive.append(
+  fs.createReadStream('./dist/assets/customers/human.png'), {
+    name: 'assets/customers/human.png'
+  }
+)
+archive.append(
+  fs.createReadStream('./dist/assets/customers/lanius.png'), {
+    name: 'assets/customers/lanius.png'
+  }
+)
+archive.append(
+  fs.createReadStream('./dist/assets/customers/mantis.png'), {
+    name: 'assets/customers/mantis.png'
+  }
+)
+archive.append(
+  fs.createReadStream('./dist/assets/customers/rockman.png'), {
+    name: 'assets/customers/rockman.png'
+  }
+)
+archive.append(
+  fs.createReadStream('./dist/assets/customers/slug.png'), {
+    name: 'assets/customers/slug.png'
+  }
+)
+archive.append(
+  fs.createReadStream('./dist/assets/customers/zoltan.png'), {
+    name: 'assets/customers/zoltan.png'
+  }
+)
+
 archive.finalize()

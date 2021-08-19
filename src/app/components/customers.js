@@ -7,7 +7,7 @@ function Customers(state) {
     return html`
         <div>
             <h2>Customers</h2>
-            <ul>
+            <ul style='list-style-type:none;'>
                 ${customers.map(Customer)}
             </ul>
         </div>

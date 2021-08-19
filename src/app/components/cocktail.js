@@ -13,7 +13,7 @@ function Cocktail(state) {
             ${decorations.map(Decoration)}
         </ul>
         <p style='display:none'>
-            ${shape.name}
+            ${shape.id ? shape.id.toLowerCase(): ''}
         </p>
         <canvas id="cocktail" style="height:600px; border: 1px solid; image-rendering: crisp-edges;"></canvas>
     `;
