@@ -1,4 +1,4 @@
-import { INGREDIENTS } from './enum';
+import { INGREDIENTS, DECORATIONS, SHAPES, RECIPES, CUSTOMERS } from './enum';
 
 const init = {
     timer: '00:00',
@@ -7,11 +7,20 @@ const init = {
     sentence: '\'a green Zoltan please, im thirsty\'',
     ingredients: [],
     decorations: [],
-    recipe: {
-        title: '\'The Green Zoltan\'',
-        content: '2x Acanthe, 2x Qarus, 1x Fireweed'
-    }
+    shape:{},
+    recipe: RECIPES.BLUE_LAGOON,
+    phase: SHAPES
 };
+
+for (let i = 0; i < 8; i++) {
+    init.customers.push(
+        {
+            name:'random_name',
+            type:CUSTOMERS[Object.keys(CUSTOMERS)[Math.floor(Math.random() * Object.keys(CUSTOMERS).length)]]
+        }
+    );
+}
+
 
 export default function reducer(state = init, action, args) {
     switch (action) {
@@ -45,18 +54,63 @@ export default function reducer(state = init, action, args) {
         });
     }
     case 'KEY_PRESSED': {
-        const {ingredients} = state;
-        const [keyCode] = args;
-        let ingredient;
-        Object.keys(INGREDIENTS).forEach(i => {
-            if (keyCode == INGREDIENTS[i].key) {
-                ingredient = INGREDIENTS[i];
-            }
-        });
-        if (ingredient) {
+        const {ingredients, decorations, phase} = state;
+        const [key] = args;
+        if(key == "Enter"){
             return Object.assign({}, state, {
-                ingredients: [...ingredients, ingredient]
+                ingredients: [],
+                decorations: [],
+                phase: SHAPES,
+                shape:{},
+                recipe: RECIPES[Object.keys(RECIPES)[Math.floor(Math.random() * Object.keys(RECIPES).length)]]
             });
+        }
+
+        if(phase == SHAPES){
+            let glass;
+            Object.keys(SHAPES).forEach(i => {
+                if (key == SHAPES[i].key) {
+                    glass = SHAPES[i];
+                }
+            });
+            if (glass) {
+                return Object.assign({}, state, {
+                    shape: glass,
+                    ingredients: [],
+                    decorations: [],
+                    phase: INGREDIENTS
+                });
+            }
+        }
+
+        else if(phase == INGREDIENTS){
+            let ingredient;
+            Object.keys(INGREDIENTS).forEach(i => {
+                if (key == INGREDIENTS[i].key) {
+                    ingredient = INGREDIENTS[i];
+                }
+            });
+            if (ingredient) {
+                return Object.assign({}, state, {
+                    ingredients: [...ingredients, ingredient],
+                    phase: ingredients.length < 7 ? INGREDIENTS: DECORATIONS
+                });
+            }
+    
+        }
+
+        else if(phase == DECORATIONS){
+            let decoration;
+            Object.keys(DECORATIONS).forEach(i => {
+                if (key == DECORATIONS[i].key) {
+                    decoration = DECORATIONS[i];
+                }
+            });
+            if (decoration) {
+                return Object.assign({}, state, {
+                    decorations: [...decorations, decoration]
+                });
+            }
         }
     }
     default:

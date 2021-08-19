@@ -13,7 +13,7 @@ export default function App() {
                 ${Timer()}
                 ${Gold()}
             </div>
-            <div style='display:flex; justify-content:space-between; height:90%;'>
+            <div style='display:flex; justify-content:space-evenly; height:90%;'>
                 ${Customers()}
                 ${Game()}
                 ${Controls()}

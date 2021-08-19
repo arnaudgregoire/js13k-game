@@ -43,4 +43,87 @@ archive.append(
   }
 )
 
+archive.append(
+  fs.createReadStream('./dist/assets/decorations/cherry.png'), {
+    name: 'assets/decorations/cherry.png'
+  }
+)
+
+archive.append(
+  fs.createReadStream('./dist/assets/decorations/lemon.png'), {
+    name: 'assets/decorations/lemon.png'
+  }
+)
+
+archive.append(
+  fs.createReadStream('./dist/assets/decorations/mint.png'), {
+    name: 'assets/decorations/mint.png'
+  }
+)
+
+archive.append(
+  fs.createReadStream('./dist/assets/decorations/skewer.png'), {
+    name: 'assets/decorations/skewer.png'
+  }
+)
+
+archive.append(
+  fs.createReadStream('./dist/assets/shapes/cocktail.png'), {
+    name: 'assets/shapes/cocktail.png'
+  }
+)
+
+archive.append(
+  fs.createReadStream('./dist/assets/shapes/standard.png'), {
+    name: 'assets/shapes/standard.png'
+  }
+)
+
+archive.append(
+  fs.createReadStream('./dist/assets/shapes/balloon.png'), {
+    name: 'assets/shapes/balloon.png'
+  }
+)
+
+archive.append(
+  fs.createReadStream('./dist/assets/customers/crystal.png'), {
+    name: 'assets/customers/crystal.png'
+  }
+)
+archive.append(
+  fs.createReadStream('./dist/assets/customers/engi.png'), {
+    name: 'assets/customers/engi.png'
+  }
+)
+archive.append(
+  fs.createReadStream('./dist/assets/customers/human.png'), {
+    name: 'assets/customers/human.png'
+  }
+)
+archive.append(
+  fs.createReadStream('./dist/assets/customers/lanius.png'), {
+    name: 'assets/customers/lanius.png'
+  }
+)
+archive.append(
+  fs.createReadStream('./dist/assets/customers/mantis.png'), {
+    name: 'assets/customers/mantis.png'
+  }
+)
+archive.append(
+  fs.createReadStream('./dist/assets/customers/rockman.png'), {
+    name: 'assets/customers/rockman.png'
+  }
+)
+archive.append(
+  fs.createReadStream('./dist/assets/customers/slug.png'), {
+    name: 'assets/customers/slug.png'
+  }
+)
+archive.append(
+  fs.createReadStream('./dist/assets/customers/zoltan.png'), {
+    name: 'assets/customers/zoltan.png'
+  }
+)
+
 archive.finalize()

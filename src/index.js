@@ -1,6 +1,6 @@
 import { App } from './app/app';
 import { attach, dispatch } from './app/store';
-import { renderCanvas } from './app/canvas-manager';
+import CanvasManager from './app/canvas-manager';
 
 window.onload = init;
 
@@ -9,11 +9,12 @@ function init () {
         dispatch('KEY_PRESSED', evt.key);
     };
     var root = document.querySelector('#root');
+    let canvasManager = new CanvasManager();
     root.addEventListener('render', function(event) {
         // event.detail is the state that was rendered.
-        const { ingredients, decorations } = event.detail;
+        const { ingredients, decorations, shape } = event.detail;
         if (ingredients) {
-            renderCanvas(ingredients, decorations);
+            canvasManager.renderCanvas(ingredients, decorations, shape);
         }
     });
     attach(App, root);

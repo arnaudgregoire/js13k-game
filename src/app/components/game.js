@@ -6,7 +6,7 @@ import Cocktail from './cocktail';
 function Game(state) {
     const { recipe, sentence, cocktail } = state;
     return html`
-        <div style='display:flex; justify-content:space-between;flex-flow:column;'>
+        <div style='display:flex; justify-content:space-between;flex-flow:column; align-items:center'>
             <h3>${sentence}</h3>
             ${Cocktail(cocktail)}
             ${Recipe(recipe)}
