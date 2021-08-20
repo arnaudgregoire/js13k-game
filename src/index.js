@@ -1,13 +1,8 @@
-import { App } from './app/app';
+import App from './app/app';
 import { attach, dispatch } from './app/store';
 import CanvasManager from './app/canvas-manager';
 
-window.onload = init;
-
-function init () {
-    window.onkeypress = (evt) => {
-        dispatch('KEY_PRESSED', evt.key);
-    };
+window.onload = () => {
     var root = document.querySelector('#root');
     let canvasManager = new CanvasManager();
     root.addEventListener('render', function(event) {
@@ -18,10 +13,11 @@ function init () {
         }
     });
     attach(App, root);
-    game = new Game()
-    game.start()
 }
 
+window.onkeypress = (evt) => {
+    dispatch('KEY_PRESSED', evt.key);
+};
 
 //setInterval(()=>{dispatch('CHANGE_TIMER', (Math.random()*100).toFixed(2))}, 1000);
 //setInterval(()=>{dispatch('CHANGE_GOLD', parseInt(Math.random()*100))}, 1500);
