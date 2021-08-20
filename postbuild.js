@@ -74,8 +74,8 @@ archive.append(
 )
 
 archive.append(
-  fs.createReadStream('./dist/assets/shapes/standard.png'), {
-    name: 'assets/shapes/standard.png'
+  fs.createReadStream('./dist/assets/shapes/old_fashioned.png'), {
+    name: 'assets/shapes/old_fashioned.png'
   }
 )
 
