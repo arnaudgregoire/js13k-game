@@ -15,7 +15,7 @@ function Cocktail(state) {
         <p style='display:none'>
             ${shape.id ? shape.id.toLowerCase(): ''}
         </p>
-        <canvas id="cocktail" style="height:600px; border: 1px solid; image-rendering: crisp-edges;"></canvas>
+        <canvas id="cocktail" style="height:600px; image-rendering: crisp-edges;"></canvas>
     `;
 }
 
