@@ -3,18 +3,13 @@ import { DECORATIONS, SHAPES } from "./enum";
 export default class CanvasManager{
     constructor(){
         this.decorationsImages = new Map();
-        this.shapesImages = new Map();
+        this.shapes = new Image();
+        this.shapes.src = `assets/shapes/shapes.png`;
 
         Object.keys(DECORATIONS).forEach(decoration=>{
             let image = new Image();
             image.src=`assets/decorations/${decoration}.png`;
             this.decorationsImages.set(decoration, image);
-        });
-
-        Object.keys(SHAPES).forEach(shape=>{
-            let image = new Image();
-            image.src = `assets/shapes/${shape}.png`;
-            this.shapesImages.set(shape, image);
         });
     }
 
@@ -27,10 +22,9 @@ export default class CanvasManager{
 
     renderCanvas(ingredients, decorations, shape) {
         let canvas = document.getElementById('cocktail');
-        let glass = this.shapesImages.get(shape.id);
-        if (canvas && glass) {
+        if (canvas && shape) {
             let ctx = canvas.getContext('2d');
-            const margin = {x:Math.floor(canvas.width/2 - glass.width /2), y:Math.floor(canvas.height/2 -glass.height/3)};
+            const margin = {x:Math.floor(canvas.width/2 - shape.w /2), y:Math.floor(canvas.height/2 -shape.h/3)};
             const topLeft = {x:0, y:0};
             const bottomRight = {x:shape.x, y:shape.y};
             const bottomLeft = {x:0, y:shape.y};
@@ -52,7 +46,7 @@ export default class CanvasManager{
                 ctx.fill();
             });
 
-            ctx.drawImage(glass, margin.x, margin.y);
+            ctx.drawImage(this.shapes, shape.d, 0, shape.w, shape.h, margin.x, margin.y, shape.w, shape.h);
 
             decorations.forEach((decoration, index) =>{
                 let decorationImage = this.decorationsImages.get(decoration.id);

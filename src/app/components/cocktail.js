@@ -6,6 +6,7 @@ import Decoration from './decoration';
 function Cocktail(state) {
     const { ingredients, decorations, shape } = state;
     return html`
+        <div style='flex-grow:4;width:100%;text-align:center;'>
         <ul style='display:none; list-style-type:none'>
             ${ingredients.map(Ingredient)}
         </ul>
@@ -15,7 +16,8 @@ function Cocktail(state) {
         <p style='display:none'>
             ${shape.id ? shape.id.toLowerCase(): ''}
         </p>
-        <canvas id="cocktail" style="height:600px; image-rendering: crisp-edges;"></canvas>
+        <canvas id="cocktail" style="image-rendering: crisp-edges; height:100%;"></canvas>
+        </div>
     `;
 }
 

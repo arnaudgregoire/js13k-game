@@ -93,25 +93,37 @@ export const SHAPES = {
         key: 'b',
         id:'BALLOON',
         x:66,
-        y:66
+        y:66,
+        w:70,
+        h:88,
+        d:0
     },
     COCKTAIL:{
         key: 'c',
         id:'COCKTAIL',
         x:76,
-        y:38
+        y:38,
+        w:76,
+        h:88,
+        d:70
     },
     OLD_FASHIONED:{
         key: 'o',
         id:'OLD_FASHIONED',
         x:72,
-        y:62
+        y:62,
+        w:74,
+        h:74,
+        d:146
     },
     TUMBLER:{
         key:'t',
         id:'TUMBLER',
         x:45,
-        y:90
+        y:90,
+        w:48,
+        h:102,
+        d:221
     }
 }
 

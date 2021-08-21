@@ -68,20 +68,8 @@ archive.append(
 )
 
 archive.append(
-  fs.createReadStream('./dist/assets/shapes/cocktail.png'), {
-    name: 'assets/shapes/cocktail.png'
-  }
-)
-
-archive.append(
-  fs.createReadStream('./dist/assets/shapes/old_fashioned.png'), {
-    name: 'assets/shapes/old_fashioned.png'
-  }
-)
-
-archive.append(
-  fs.createReadStream('./dist/assets/shapes/balloon.png'), {
-    name: 'assets/shapes/balloon.png'
+  fs.createReadStream('./dist/assets/shapes/shapes.png'), {
+    name: 'assets/shapes/shapes.png'
   }
 )
 
