@@ -1,21 +1,9 @@
-import { DECORATIONS, SHAPES } from "./enum";
-
 export default class CanvasManager{
     constructor(){
-        this.decorationsImages = new Map();
-        this.shapesImages = new Map();
-
-        Object.keys(DECORATIONS).forEach(decoration=>{
-            let image = new Image();
-            image.src=`assets/decorations/${decoration}.png`;
-            this.decorationsImages.set(decoration, image);
-        });
-
-        Object.keys(SHAPES).forEach(shape=>{
-            let image = new Image();
-            image.src = `assets/shapes/${shape}.png`;
-            this.shapesImages.set(shape, image);
-        });
+        this.decorations = new Image();
+        this.decorations.src = 'assets/decorations/decorations.png';
+        this.shapes = new Image();
+        this.shapes.src = 'assets/shapes/shapes.png';
     }
 
     getCoordinate(a,b,ratio){
@@ -27,14 +15,15 @@ export default class CanvasManager{
 
     renderCanvas(ingredients, decorations, shape) {
         let canvas = document.getElementById('cocktail');
-        let glass = this.shapesImages.get(shape.id);
-        if (canvas && glass) {
+        if (canvas && shape) {
             let ctx = canvas.getContext('2d');
-            const margin = {x:Math.floor(canvas.width/2 - glass.width /2), y:Math.floor(canvas.height/2 -glass.height/3)};
+            ctx.imageSmoothingEnabled = false;
+
+            const margin = {x:Math.floor(canvas.width/2 - shape.w), y:Math.floor(canvas.height/2 -shape.h/2)};
             const topLeft = {x:0, y:0};
-            const bottomRight = {x:shape.x, y:shape.y};
-            const bottomLeft = {x:0, y:shape.y};
-            const topRight = {x:shape.x, y:0};
+            const bottomRight = {x:shape.x * 2, y:shape.y * 2};
+            const bottomLeft = {x:0, y:shape.y * 2};
+            const topRight = {x:shape.x * 2, y:0};
     
             ingredients.forEach((ingredient, index) => {
                 ctx.fillStyle = ingredient.color;
@@ -52,18 +41,33 @@ export default class CanvasManager{
                 ctx.fill();
             });
 
-            ctx.drawImage(glass, margin.x, margin.y);
+            ctx.drawImage(this.shapes, shape.d, 0, shape.w, shape.h, margin.x, margin.y, shape.w * 2, shape.h * 2);
 
             decorations.forEach((decoration, index) =>{
-                let decorationImage = this.decorationsImages.get(decoration.id);
                 if(index%2 == 0){
-                    ctx.drawImage(decorationImage, topRight.x + margin.x + decoration.x, topRight.y + margin.y + decoration.y);
+                    ctx.drawImage(this.decorations,
+                        decoration.d,
+                        0,
+                        decoration.w,
+                        decoration.h,
+                        margin.x + shape.x * 2 + decoration.x *2,
+                        margin.y + decoration.y * 2,
+                        decoration.w * 2,
+                        decoration.h * 2);
                 }
                 else{
                     ctx.save();
                     ctx.translate(canvas.width, 0);
                     ctx.scale(-1,1);
-                    ctx.drawImage(decorationImage, topRight.x + margin.x + decoration.x, topRight.y + margin.y + decoration.y);
+                    ctx.drawImage(this.decorations,
+                        decoration.d,
+                        0,
+                        decoration.w,
+                        decoration.h,
+                        margin.x + shape.x * 2 + decoration.x * 2,
+                        margin.y + decoration.y * 2,
+                        decoration.w * 2,
+                        decoration.h * 2);
                     ctx.restore();
                 }
             });

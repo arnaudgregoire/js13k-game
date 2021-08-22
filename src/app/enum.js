@@ -65,53 +65,132 @@ export const DECORATIONS = {
     CHERRY:{
         key: 'c',
         id: 'CHERRY',
-        x:-20,
-        y:-32
+        x:-10,
+        y:-16,
+        w:18,
+        h:16,
+        d:20
     },
     LEMON:{
         key: 'l',
         id: 'LEMON',
-        x:-28,
-        y:-22
+        x:-14,
+        y:-11,
+        w:24,
+        h:23,
+        d:39
     },
     MINT:{
         key: 'm',
         id: 'MINT',
-        x:-45,
-        y:-20
+        x:-22,
+        y:-10,
+        w:17,
+        h:10,
+        d:64
     },
     SKEWER:{
         key: 's',
         id: 'SKEWER',
+        x:-10,
+        y:-20,
+        w:20,
+        h:23,
+        d:0
+    },
+    APPLE:{
+        key:'a',
+        id:'APPLE',
         x:-20,
-        y:-40
+        y:-12,
+        w:23,
+        h:12,
+        d:81
+    },
+    STRAWBERRY:{
+        key:'w',
+        id:'STRAWBERRY',
+        x:-7,
+        y:-18,
+        w:18,
+        h:24,
+        d:104
+    },
+    LIME:{
+        key:'i',
+        id:'LIME',
+        x:-9,
+        y:-8,
+        w:18,
+        h:24,
+        d:123
+    },
+    STRAW:{
+        key:'r',
+        id:'STRAW',
+        x:-11,
+        y:-12,
+        w:19,
+        h:12,
+        d:144      
+    },
+    CHOCOLATE:{
+        key:'o',
+        id:'CHOCOLATE',
+        x:-25,
+        y:-18,
+        w:19,
+        h:18,
+        d:163
+    },
+    CANDY:{
+        key:'y',
+        id:'CANDY',
+        x:-8,
+        y:-11,
+        w:17,
+        h:13,
+        d:184
     }
+
 }
 
 export const SHAPES = {
     BALLOON:{
         key: 'b',
         id:'BALLOON',
-        x:66,
-        y:66
+        x:33,
+        y:33,
+        w:35,
+        h:44,
+        d:0
     },
     COCKTAIL:{
         key: 'c',
         id:'COCKTAIL',
-        x:76,
-        y:38
+        x:38,
+        y:19,
+        w:38,
+        h:44,
+        d:35
     },
     OLD_FASHIONED:{
         key: 'o',
         id:'OLD_FASHIONED',
-        x:72,
-        y:62
+        x:36,
+        y:31,
+        w:37,
+        h:37,
+        d:73
     },
     TUMBLER:{
         key:'t',
         id:'TUMBLER',
-        x:45,
-        y:90
+        x:22,
+        y:45,
+        w:24,
+        h:51,
+        d:110
     }
 }
 

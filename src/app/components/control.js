@@ -14,7 +14,6 @@ export default function Control(control, index) {
             <li style="color:black; background:white; display:flex; justify-content:space-between; align-items:center;">
             <h1>${DECORATIONS[control].key.toUpperCase()}</h1>
             <p style="flex-grow:4; text-align:center;">${window.idToName(DECORATIONS[control].id.toLowerCase())}</p>
-            <img style="height:30px;" src="assets/decorations/${DECORATIONS[control].id.toLowerCase()}.png"/>
         </li>`;
     }
     else{
