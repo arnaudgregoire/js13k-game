@@ -117,14 +117,42 @@ export const DECORATIONS = {
         d:104
     },
     LIME:{
-        key:'l',
+        key:'i',
         id:'LIME',
         x:-9,
         y:-8,
         w:18,
         h:24,
         d:123
+    },
+    STRAW:{
+        key:'r',
+        id:'STRAW',
+        x:-11,
+        y:-12,
+        w:19,
+        h:12,
+        d:144      
+    },
+    CHOCOLATE:{
+        key:'o',
+        id:'CHOCOLATE',
+        x:-25,
+        y:-18,
+        w:19,
+        h:18,
+        d:163
+    },
+    CANDY:{
+        key:'y',
+        id:'CANDY',
+        x:-8,
+        y:-11,
+        w:17,
+        h:13,
+        d:184
     }
+
 }
 
 export const SHAPES = {
