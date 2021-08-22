@@ -12,14 +12,12 @@ const init = {
     phase: SHAPES
 };
 
-for (let i = 0; i < 8; i++) {
-    init.customers.push(
-        {
-            name:'random_name',
-            type:CUSTOMERS[Object.keys(CUSTOMERS)[Math.floor(Math.random() * Object.keys(CUSTOMERS).length)]]
-        }
-    );
-}
+// for (let i = 0; i < 8; i++) {
+//     init.customers.push({
+//         name:'random_name',
+//         type:CUSTOMERS[Object.keys(CUSTOMERS)[Math.floor(Math.random() * Object.keys(CUSTOMERS).length)]]
+//     });
+// }
 
 
 export default function reducer(state = init, action, args) {
@@ -53,6 +51,7 @@ export default function reducer(state = init, action, args) {
             ]
         });
     }
+    /*
     case 'KEY_PRESSED': {
         const {ingredients, decorations, phase} = state;
         const [key] = args;
@@ -113,6 +112,7 @@ export default function reducer(state = init, action, args) {
             }
         }
     }
+    */
     default:
         return state;
     }

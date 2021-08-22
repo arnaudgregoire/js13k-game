@@ -1,10 +1,12 @@
 const fs = require('fs')
+const path = require('path')
 const archiver = require('archiver')
 
+if (!fs.existsSync('./build')) {
+  fs.mkdirSync('./build')
+}
 let output = fs.createWriteStream('./build/build.zip')
-let archive = archiver('zip', {
-  zlib: { level: 9 } // set compression to best
-})
+let archive = archiver('zip', { zlib: { level: 9 } })
 
 const MAX = 13 * 1024 // 13kb
 
@@ -31,69 +33,18 @@ archive.on('error', function (err) {
 })
 
 archive.pipe(output)
-archive.append(
-  fs.createReadStream('./dist/index.html'), {
-    name: 'index.html'
-  }
-)
 
-archive.append(
-  fs.createReadStream('./dist/index.js'), {
-    name: 'index.js'
-  }
-)
+const addDirectoryToArchive = (directory) => {
+  fs.readdirSync(directory).forEach(name => {
+    const fullName = path.join(directory, name)
+    if (fs.statSync(fullName).isDirectory()) {
+      addDirectoryToArchive(fullName)
+    } else {
+      archive.append(fs.createReadStream(fullName), { name: fullName.split('/').slice(2).join('/') })
+    }
+  })
+}
 
-archive.append(
-  fs.createReadStream('./dist/assets/decorations/decorations.png'), {
-    name: 'assets/decorations/decorations.png'
-  }
-)
-
-archive.append(
-  fs.createReadStream('./dist/assets/shapes/shapes.png'), {
-    name: 'assets/shapes/shapes.png'
-  }
-)
-
-archive.append(
-  fs.createReadStream('./dist/assets/customers/crystal.png'), {
-    name: 'assets/customers/crystal.png'
-  }
-)
-archive.append(
-  fs.createReadStream('./dist/assets/customers/engi.png'), {
-    name: 'assets/customers/engi.png'
-  }
-)
-archive.append(
-  fs.createReadStream('./dist/assets/customers/human.png'), {
-    name: 'assets/customers/human.png'
-  }
-)
-archive.append(
-  fs.createReadStream('./dist/assets/customers/lanius.png'), {
-    name: 'assets/customers/lanius.png'
-  }
-)
-archive.append(
-  fs.createReadStream('./dist/assets/customers/mantis.png'), {
-    name: 'assets/customers/mantis.png'
-  }
-)
-archive.append(
-  fs.createReadStream('./dist/assets/customers/rockman.png'), {
-    name: 'assets/customers/rockman.png'
-  }
-)
-archive.append(
-  fs.createReadStream('./dist/assets/customers/slug.png'), {
-    name: 'assets/customers/slug.png'
-  }
-)
-archive.append(
-  fs.createReadStream('./dist/assets/customers/zoltan.png'), {
-    name: 'assets/customers/zoltan.png'
-  }
-)
+addDirectoryToArchive('./dist')
 
 archive.finalize()

@@ -1,5 +1,6 @@
 import App from './app/app';
-import { attach, dispatch } from './app/store';
+import { attach } from './app/store';
+import { Game } from './app/game/game'
 import CanvasManager from './app/canvas-manager';
 
 window.onload = () => {
@@ -13,13 +14,15 @@ window.onload = () => {
         }
     });
     attach(App, root);
+
+    Game.start();
 }
 
-window.onkeypress = (evt) => {
-    dispatch('KEY_PRESSED', evt.key);
-};
+// window.onkeypress = (evt) => {
+//     dispatch('KEY_PRESSED', evt.key);
+// };
 
-window.idToName = (id)=>{
+window.idToName = (id) => {
     return id.replace('_',' ');
 }
 

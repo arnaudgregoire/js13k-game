@@ -352,5 +352,4 @@ export const CUSTOMERS = {
     ROCKMAN:'ROCKMAN',
     ZOLTAN:'ZOLTAN',
     LANIUS:'LANIUS'
-
 }
