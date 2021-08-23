@@ -1,23 +1,16 @@
-import { INGREDIENTS, DECORATIONS, SHAPES, RECIPES, CUSTOMERS } from './enum';
+import { DECORATIONS, INGREDIENTS, SHAPES } from "./enum";
 
 const init = {
-    timer: '00:00',
+    timers: [],
     gold: 0,
-    customers: [],
-    sentence: '\'a green Zoltan please, im thirsty\'',
+    commands: [],
+    sentence: '',
     ingredients: [],
     decorations: [],
     shape:{},
-    recipe: RECIPES.BLUE_LAGOON,
-    phase: SHAPES
+    recipe: {},
+    controls:[]
 };
-
-// for (let i = 0; i < 8; i++) {
-//     init.customers.push({
-//         name:'random_name',
-//         type:CUSTOMERS[Object.keys(CUSTOMERS)[Math.floor(Math.random() * Object.keys(CUSTOMERS).length)]]
-//     });
-// }
 
 
 export default function reducer(state = init, action, args) {
@@ -28,92 +21,123 @@ export default function reducer(state = init, action, args) {
             timer: timer
         });
 
-    case 'CHANGE_GOLD': {
+    case 'UPDATE_MONEY': {
         const [gold] = args;
         return Object.assign({}, state, {
             gold: gold
         });
     }
-    case 'ADD_CUSTOMER': {
-        const {customers} = state;
-        const [customer] = args;
+
+    case 'ADD_COMMAND': {
+        const {commands} = state;
+        const [command] = args;
         return Object.assign({}, state, {
-            customers: [...customers, customer]
+            commands: [...commands, command]
         });
     }
-    case 'REMOVE_CUSTOMER': {
-        const {customers} = state;
+    case 'REMOVE_COMMAND': {
+        const {commands} = state;
         const [index] = args;
         return Object.assign({}, state, {
-            customers: [
-                ...customers.slice(0, index),
-                ...customers.slice(index + 1)
+            commands: [
+                ...commands.slice(0, index),
+                ...commands.slice(index + 1)
             ]
         });
     }
-    /*
-    case 'KEY_PRESSED': {
-        const {ingredients, decorations, phase} = state;
-        const [key] = args;
-        if(key == "Enter"){
+    case 'REFRESH_TIMER':{
+        const {commands} = state;
+        const [timers] = args;
+        const newCommands = [...commands];
+        for (let i = 0; i < newCommands.length; i++) {
+            newCommands[i].timer = timers[i];
+        }
+        return Object.assign({}, state, {
+            commands: newCommands
+        });
+    }
+
+    case 'ADD_ITEM':{
+       const [activeCommand] = args;
+       return Object.assign({}, state, {
+            shape: activeCommand.shape,
+            ingredients:activeCommand.ingredients,
+            decorations:activeCommand.decorations
+        });
+    }
+
+    case 'NEXT_STEP':{
+        const {commands} = state;
+        const [activeCommand, index] = args;
+        const newCommands = [...commands];
+        newCommands[index].step = activeCommand.step;
+        return Object.assign({}, state, {
+            controls: getControls(activeCommand.step),
+            commands: newCommands
+        });
+    }
+
+    case 'ACTIVATE_COMMAND':{
+        const {commands} = state;
+        const [activeCommand] = args;
+        const newCommands = [...commands];
+        newCommands.forEach(c=>{
+            c.selected = false;
+        });
+
+        if(activeCommand.customer){
+            newCommands[newCommands.indexOf(activeCommand)].selected = true;
             return Object.assign({}, state, {
-                ingredients: [],
-                decorations: [],
-                phase: SHAPES,
-                shape:{},
-                recipe: RECIPES[Object.keys(RECIPES)[Math.floor(Math.random() * Object.keys(RECIPES).length)]]
+                commands: newCommands,
+                recipe: activeCommand.recipe,
+                sentence: `${activeCommand.recipe.name},please`,
+                controls: getControls(activeCommand.step),
+                ingredients: activeCommand.ingredients,
+                shape: activeCommand.shape,
+                decorations: activeCommand.decorations
             });
-        }
-
-        if(phase == SHAPES){
-            let glass;
-            Object.keys(SHAPES).forEach(i => {
-                if (key == SHAPES[i].key) {
-                    glass = SHAPES[i];
-                }
-            });
-            if (glass) {
-                return Object.assign({}, state, {
-                    shape: glass,
-                    ingredients: [],
-                    decorations: [],
-                    phase: INGREDIENTS
-                });
-            }
-        }
-
-        else if(phase == INGREDIENTS){
-            let ingredient;
-            Object.keys(INGREDIENTS).forEach(i => {
-                if (key == INGREDIENTS[i].key) {
-                    ingredient = INGREDIENTS[i];
-                }
-            });
-            if (ingredient) {
-                return Object.assign({}, state, {
-                    ingredients: [...ingredients, ingredient],
-                    phase: ingredients.length < 7 ? INGREDIENTS: DECORATIONS
-                });
-            }
-    
-        }
-
-        else if(phase == DECORATIONS){
-            let decoration;
-            Object.keys(DECORATIONS).forEach(i => {
-                if (key == DECORATIONS[i].key) {
-                    decoration = DECORATIONS[i];
-                }
-            });
-            if (decoration) {
-                return Object.assign({}, state, {
-                    decorations: [...decorations, decoration]
-                });
-            }
         }
     }
-    */
+
+    case 'RESET':{
+        return Object.assign({}, state, {
+            sentence: '',
+            ingredients: [],
+            decorations: [],
+            shape:{},
+            recipe: {},
+            controls:[]
+        });
+    }
+
     default:
         return state;
     }
+}
+
+function getControls(step){
+    let newControls = [];
+    switch (step) {
+        case 0:
+            newControls = Object.keys(SHAPES);
+            break;
+        
+        case 1:
+            newControls = Object.keys(INGREDIENTS);
+            break;
+    
+        case 2:
+            newControls = Object.keys(DECORATIONS);
+            break;
+
+        case 3:
+            break;
+
+        case 4:
+            break;
+
+        default:
+            break;
+    }
+    return newControls;
 }

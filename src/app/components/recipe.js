@@ -3,7 +3,8 @@ import { connect } from '../store';
 
 function Recipe(state) {
     const { recipe } = state;
-    return html`
+    if(recipe.id){
+        return html`
         <div style='width:100%; text-align: center;'>
             <h1>${recipe.name}</h1>
             <div style='display:flex; justify-content:space-evenly; align-items:center;'>
@@ -18,6 +19,10 @@ function Recipe(state) {
             </div>
         </div>
     `;
+    }
+    else{
+        return html``;
+    }
 }
 
 export default connect(Recipe);

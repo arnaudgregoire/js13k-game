@@ -1,8 +1,8 @@
-import { CUSTOMERS, RECIPES } from '../enum';
+import { CUSTOMERS, DECORATIONS, INGREDIENTS, RECIPES, SHAPES } from '../enum';
 
 var gameState = {
   commands: [],
-  activeCommand: 0,
+  activeCommand: {},
   money: 0
 }
 
@@ -19,8 +19,8 @@ var gameLoop = {
 function start() {
   stop();
   window.onkeypress = (e) => { gameLoop.keys.push(e.key); };
-  gameState.commands = [createCommand()];
-  gameState.activeCommand = 0;
+  gameState.commands = [];
+  gameState.activeCommand = {};
   gameState.newCustomerTimer = 0;
   gameLoop.keys = [];
   gameLoop.events = [];
@@ -46,9 +46,10 @@ function loop () {
     if (key == ' ') { console.log(gameState, gameLoop); stop(); return; }
     if (key == 'Enter') {
       // check command status
-      var command = gameState.commands[gameState.activeCommand];
-      if (command && command.step == 3) {
-        command.step++;
+      var command = gameState.activeCommand;
+      if (command) {
+        command.step = 4;
+        // TODO compute a score based on a 'distance' between the cocktail and the recipe 
       }
     } else {
       var code = key.charCodeAt(0);
@@ -57,36 +58,65 @@ function loop () {
         var int = parseInt(key);
         if (int > 0 && int < 10) {
           // update active command
-          var activeCommand = int - 1;
-          if (gameState.activeCommand != activeCommand) {
-            gameState.activeCommand = activeCommand;
-            gameLoop.events.push({ type: 'ACTIVATE_COMMAND', args: [activeCommand] });
+          var activeIndex = int - 1;
+          if(gameState.commands[activeIndex]){
+            gameState.activeCommand = gameState.commands[activeIndex];
+            gameLoop.events.push({ type: 'ACTIVATE_COMMAND', args: [gameState.activeCommand] });
           }
         }
       } else if (code > 96 && code < 123) {
         // lowercase letter
-        var command = gameState.commands[gameState.activeCommand];
-        if (command) {
-          // find key in current command
-          var idx = command.keys.indexOf(key);
-          if (idx > -1) {
-            var s = command.step, r = command.recipe;
-            // find item based on step & key
-            var item = s == 0 ? r.shape : s == 1 ? r.ingredients.find(e => e.key == key) : r.decorations.find(e => e.key == key);
-            gameLoop.events.push({ type: 'ADD_ITEM', args: [gameState.activeCommand, item]});
-            command.keys.splice(idx, 1);
-            // if step is complete
-            if (command.keys.length == 0) {
-              command.step++;
-            gameLoop.events.push({ type: 'NEXT_STEP', args: [gameState.activeCommand]});
-              // get next set of keys
-              command.keys = command.step == 1 ? getIngredientKeys(r) : command.step == 2 ? getDecorationKeys(r) : [];
-              // if decorations is empty, skip step
-              if (command.step == 2 && command.keys.length == 0) {
-                command.step++;
-                gameLoop.events.push({ type: 'NEXT_STEP', args: [gameState.activeCommand]});
+        var command = gameState.activeCommand;
+        if (command.recipe) {
+          let nextStep = false;
+          switch (command.step) {
+            case 0:
+              Object.keys(SHAPES).forEach(i => {
+                if (key == SHAPES[i].key) {
+                    command.shape = SHAPES[i];
+                    gameLoop.events.push({ type: 'ADD_ITEM', args: [command]});
+                    nextStep = true;
+                }
+              });
+              break;
+          
+            case 1:
+              Object.keys(INGREDIENTS).forEach(i => {
+                if (key == INGREDIENTS[i].key) {
+                    command.ingredients.push(INGREDIENTS[i]);
+                    gameLoop.events.push({ type: 'ADD_ITEM', args: [command]});
+                }
+              });
+              if(command.ingredients.length >= 8){
+                nextStep = true;
               }
-            }
+              break;
+
+            case 2:
+              Object.keys(DECORATIONS).forEach(i => {
+                if (key == DECORATIONS[i].key) {
+                    command.decorations.push(DECORATIONS[i]);
+                    gameLoop.events.push({ type: 'ADD_ITEM', args: [command]});
+                }
+              });
+              if(command.decorations.length > 3){
+                nextStep = true;
+              }
+              break;
+
+            case 3:
+              break;
+
+            case 4:
+              break;
+
+            default:
+              break;
+          }
+
+          if(nextStep){
+            gameState.activeCommand.step += 1;
+            gameLoop.events.push({ type: 'NEXT_STEP', args: [gameState.activeCommand, gameState.commands.indexOf(gameState.activeCommand)]});
           }
         }
       }
@@ -102,17 +132,26 @@ function loop () {
       if (command.step == 4) {
         // remove command, increase money
         gameState.money += 10;
-        gameState.commands[i] = undefined;
+        gameState.commands = [
+          ...gameState.commands.slice(0, i),
+          ...gameState.commands.slice(i + 1)
+        ];
         // both event could be merge for performance
         gameLoop.events.push({ type: 'REMOVE_COMMAND', args: [i] });
         gameLoop.events.push({ type: 'UPDATE_MONEY', args: [gameState.money] });
+        gameLoop.events.push({ type: 'RESET', args: [] });
       } else {
         // decrease command timer
-        command.timer -= dt;
+        if(command != gameState.activeCommand){
+          command.timer -= dt;
+        }
         if (command.timer <= 0) {
           // remove command, decrease money
           gameState.money -= 10;
-          gameState.commands[i] = undefined;
+          gameState.commands = [
+            ...gameState.commands.slice(0, i),
+            ...gameState.commands.slice(i + 1)
+          ];
           // (same) both event could be merge for performance
           gameLoop.events.push({ type: 'REMOVE_COMMAND', args: [i]});
           gameLoop.events.push({ type: 'UPDATE_MONEY', args: [gameState.money] });
@@ -135,7 +174,7 @@ function loop () {
         gameState.commands.push(command);
       }
       gameLoop.timerNewCommand = 0;
-      gameLoop.events.push({ type: 'ADD_COMAND', args: [ommand.customer, command.recipe] });
+      gameLoop.events.push({ type: 'ADD_COMMAND', args: [command] });
     }
   }
 
@@ -143,11 +182,12 @@ function loop () {
   if (gameLoop.timerOneSecond >= 1000) {
     // send refresh timer
     var timers = [];
-    for (var i = 0; i < 9; i++) {
-      var command = gameState.commands[i];
-      timers.push(command ? command.timer : undefined);
+    gameState.commands.forEach(command=>{
+      timers.push(command.timer);
+    });
+    if(timers.length != 0){
+      gameLoop.events.push({ type: 'REFRESH_TIMER', args: [timers] });
     }
-    gameLoop.events.push({ type: 'REFRESH_TIMER', args: [timers] });
     gameLoop.timerOneSecond = 0;
   }
 
@@ -174,32 +214,12 @@ function createCommand() {
     },
     recipe: recipe,
     step: 0, // 0 = shape, 1 = ingredients, 2 = decorations, 3 = finished, 4 = sent
-    keys: getShapeKeys(recipe)
+    shape: '',
+    ingredients: [],
+    decorations: []
   }
   console.log('create new command', command);
   return command;
-}
-
-function getShapeKeys(recipe) {
-  return [recipe.shape.key]
-}
-
-function getIngredientKeys(recipe) {
-  var keys = [];
-  recipe.ingredients.forEach(value => {
-    var key = value.ingredient.key
-    for (var i = 0; i < value.quantity; i++) keys.push(key);
-  });
-  return keys;
-}
-
-function getDecorationKeys(recipe) {
-  var keys = [];
-  recipe.decorations.forEach(value => {
-    var key = value.decoration.key
-    for (var i = 0; i < value.quantity; i++) keys.push(key);
-  });
-  return keys;
 }
 
 function pick(array) {

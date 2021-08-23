@@ -1,5 +1,5 @@
 import html from 'innerself/index';
-import Customers from './components/customers';
+import Commands from './components/commands';
 import Gold from './components/gold';
 import Timer from './components/timer';
 import Game from './components/game';
@@ -14,7 +14,7 @@ export default function App() {
                 ${Gold()}
             </div>
             <div style='display:flex; justify-content:space-evenly; height:90%;'>
-                ${Customers()}
+                ${Commands()}
                 ${Game()}
                 ${Controls()}
             </div>
