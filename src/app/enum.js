@@ -132,7 +132,7 @@ export const DECORATIONS = {
         y: -12,
         w: 19,
         h: 12,
-        d: 144      
+        d: 144
     },
     CHOCOLATE: {
         key: 'o',
@@ -203,7 +203,7 @@ export const RECIPES = {
             {
                 ingredient: INGREDIENTS.GRENADINE,
                 quantity: 3
-            },       
+            },
             {
                 ingredient: INGREDIENTS.GIN,
                 quantity: 4
@@ -228,7 +228,7 @@ export const RECIPES = {
             {
                 ingredient: INGREDIENTS.CURACAO,
                 quantity: 4
-            },       
+            },
             {
                 ingredient: INGREDIENTS.VODKA,
                 quantity: 2
@@ -253,7 +253,7 @@ export const RECIPES = {
             {
                 ingredient: INGREDIENTS.LIME_JUICE,
                 quantity: 4
-            },       
+            },
             {
                 ingredient: INGREDIENTS.CACHACA,
                 quantity: 4
@@ -278,7 +278,7 @@ export const RECIPES = {
             {
                 ingredient: INGREDIENTS.CASSIS_CREAM,
                 quantity: 2
-            },       
+            },
             {
                 ingredient: INGREDIENTS.WHITE_WHINE,
                 quantity: 6
@@ -299,7 +299,7 @@ export const RECIPES = {
             {
                 ingredient: INGREDIENTS.GIN,
                 quantity: 4
-            },       
+            },
             {
                 ingredient: INGREDIENTS.TONIC,
                 quantity: 4

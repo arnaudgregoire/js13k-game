@@ -14,6 +14,7 @@
         "space-before-blocks": ["error", "always"],
         "keyword-spacing": "error",
         "key-spacing": "error",
-        "arrow-spacing": "error"
+        "arrow-spacing": "error",
+        "no-trailing-spaces": "error"
     }
 }

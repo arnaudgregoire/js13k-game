@@ -1,10 +1,10 @@
-import App from './app/app';
-import { attach } from './app/store';
 import { Game } from './app/game/game';
-import CanvasManager from './app/canvas-manager';
+import { CanvasManager } from './app/canvas-manager';
+import { attach } from './app/store';
+import App from './app/app';
 
 window.onload = () => {
-    var root = document.querySelector('#root');
+    let root = document.querySelector('#root');
     let canvasManager = new CanvasManager();
     root.addEventListener('render', function(event) {
         // event.detail is the state that was rendered.
@@ -16,14 +16,6 @@ window.onload = () => {
     attach(App, root);
 
     Game.start();
-};
-
-// window.onkeypress = (evt) => {
-//     dispatch('KEY_PRESSED', evt.key);
-// };
-
-window.idToName = (id) => {
-    return id.replace('_',' ');
 };
 
 //setInterval(()=>{dispatch('CHANGE_TIMER', (Math.random()*100).toFixed(2))}, 1000);

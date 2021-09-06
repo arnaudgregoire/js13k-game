@@ -5,7 +5,6 @@ import Timer from './components/timer';
 import Game from './components/game';
 import Controls from './components/controls';
 
-
 export default function App() {
     return html`
         <div style='height:100%; font-family:Verdana; color:white; background-color:black'>

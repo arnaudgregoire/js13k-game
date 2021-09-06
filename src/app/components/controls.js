@@ -4,7 +4,7 @@ import { connect } from '../store';
 
 function Controls(state) {
     const { controls } = state;
-    
+
     return html`
     <div style="display: flex;flex-flow: column;justify-content: space-between;">
         <h2>Controls</h2>

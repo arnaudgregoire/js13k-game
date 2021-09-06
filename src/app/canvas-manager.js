@@ -1,4 +1,4 @@
-export default class CanvasManager {
+export class CanvasManager {
     constructor() {
         this.decorations = new Image();
         this.decorations.src = 'assets/decorations/decorations.png';
@@ -6,7 +6,7 @@ export default class CanvasManager {
         this.shapes.src = 'assets/shapes/shapes.png';
     }
 
-    getCoordinate(a,b,ratio) {
+    getCoordinate(a, b, ratio) {
         return {
             x: Math.floor(a.x + (b.x - a.x) * ratio),
             y: Math.floor(a.y + (b.y - a.y) * ratio)
@@ -24,7 +24,7 @@ export default class CanvasManager {
             const bottomRight = {x: shape.x * 2, y: shape.y * 2};
             const bottomLeft = {x: 0, y: shape.y * 2};
             const topRight = {x: shape.x * 2, y: 0};
-    
+
             ingredients.forEach((ingredient, index) => {
                 ctx.fillStyle = ingredient.color;
                 ctx.beginPath();
@@ -33,7 +33,7 @@ export default class CanvasManager {
 
                 const ratioLeftUpPoint = this.getCoordinate(bottomLeft, topLeft, Math.min(0.8,(index + 1) * 0.1));
                 const ratioRightUpPoint = this.getCoordinate(bottomRight, topRight, Math.min(0.8,(index + 1) * 0.1));
-    
+
                 ctx.moveTo(ratioLeftPoint.x + margin.x, ratioLeftPoint.y + margin.y);
                 ctx.lineTo(ratioLeftUpPoint.x + margin.x, ratioLeftUpPoint.y + margin.y);
                 ctx.lineTo(ratioRightUpPoint.x + margin.x, ratioRightUpPoint.y + margin.y);

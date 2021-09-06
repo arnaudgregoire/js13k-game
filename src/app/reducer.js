@@ -12,8 +12,7 @@ const init = {
     controls: []
 };
 
-
-export default function reducer(state = init, action, args) {
+export function reducer(state = init, action, args) {
     switch (action) {
     case 'CHANGE_TIMER':
         const [timer] = args;
@@ -90,7 +89,7 @@ export default function reducer(state = init, action, args) {
             return Object.assign({}, state, {
                 commands: newCommands,
                 recipe: activeCommand.recipe,
-                sentence: `${activeCommand.recipe.name},please`,
+                sentence: `${activeCommand.recipe.name}, please`,
                 controls: getControls(activeCommand.step),
                 ingredients: activeCommand.ingredients,
                 shape: activeCommand.shape,
@@ -116,28 +115,8 @@ export default function reducer(state = init, action, args) {
 }
 
 function getControls(step) {
-    let newControls = [];
-    switch (step) {
-    case 0:
-        newControls = Object.keys(SHAPES);
-        break;
-        
-    case 1:
-        newControls = Object.keys(INGREDIENTS);
-        break;
-    
-    case 2:
-        newControls = Object.keys(DECORATIONS);
-        break;
-
-    case 3:
-        break;
-
-    case 4:
-        break;
-
-    default:
-        break;
-    }
-    return newControls;
+    if (step == 0) return Object.keys(SHAPES);
+    if (step == 1) return Object.keys(INGREDIENTS);
+    if (step == 2) return Object.keys(DECORATIONS);
+    return [];
 }

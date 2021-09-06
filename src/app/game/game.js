@@ -1,12 +1,12 @@
 import { CUSTOMERS, DECORATIONS, INGREDIENTS, RECIPES, SHAPES } from '../enum';
 
-var gameState = {
+const gameState = {
     commands: [],
     activeCommand: {},
     money: 0
 };
 
-var gameLoop = {
+const gameLoop = {
     requestId: 0,
     then: 0,
     now: 0,
@@ -49,7 +49,7 @@ function loop () {
             var command = gameState.activeCommand;
             if (command) {
                 command.step = 4;
-                // TODO compute a score based on a 'distance' between the cocktail and the recipe 
+                // TODO compute a score based on a 'distance' between the cocktail and the recipe
             }
         } else {
             var code = key.charCodeAt(0);
@@ -79,7 +79,7 @@ function loop () {
                             }
                         });
                         break;
-          
+
                     case 1:
                         Object.keys(INGREDIENTS).forEach(i => {
                             if (key == INGREDIENTS[i].key) {
@@ -225,7 +225,6 @@ function createCommand() {
 function pick(array) {
     return array[Math.random() * array.length | 0];
 }
-
 
 export var Game = {
     start: start,
