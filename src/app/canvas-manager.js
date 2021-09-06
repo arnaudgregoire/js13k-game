@@ -1,16 +1,16 @@
-export default class CanvasManager{
-    constructor(){
+export default class CanvasManager {
+    constructor() {
         this.decorations = new Image();
         this.decorations.src = 'assets/decorations/decorations.png';
         this.shapes = new Image();
         this.shapes.src = 'assets/shapes/shapes.png';
     }
 
-    getCoordinate(a,b,ratio){
-        return{
+    getCoordinate(a,b,ratio) {
+        return {
             x: Math.floor(a.x + (b.x - a.x) * ratio),
             y: Math.floor(a.y + (b.y - a.y) * ratio)
-        }
+        };
     }
 
     renderCanvas(ingredients, decorations, shape) {
@@ -19,11 +19,11 @@ export default class CanvasManager{
             let ctx = canvas.getContext('2d');
             ctx.imageSmoothingEnabled = false;
 
-            const margin = {x:Math.floor(canvas.width/2 - shape.w), y:Math.floor(canvas.height/2 -shape.h/2)};
-            const topLeft = {x:0, y:0};
-            const bottomRight = {x:shape.x * 2, y:shape.y * 2};
-            const bottomLeft = {x:0, y:shape.y * 2};
-            const topRight = {x:shape.x * 2, y:0};
+            const margin = {x: Math.floor(canvas.width/2 - shape.w), y: Math.floor(canvas.height/2 -shape.h/2)};
+            const topLeft = {x: 0, y: 0};
+            const bottomRight = {x: shape.x * 2, y: shape.y * 2};
+            const bottomLeft = {x: 0, y: shape.y * 2};
+            const topRight = {x: shape.x * 2, y: 0};
     
             ingredients.forEach((ingredient, index) => {
                 ctx.fillStyle = ingredient.color;
@@ -43,8 +43,8 @@ export default class CanvasManager{
 
             ctx.drawImage(this.shapes, shape.d, 0, shape.w, shape.h, margin.x, margin.y, shape.w * 2, shape.h * 2);
 
-            decorations.forEach((decoration, index) =>{
-                if(index%2 == 0){
+            decorations.forEach((decoration, index) => {
+                if (index%2 == 0) {
                     ctx.drawImage(this.decorations,
                         decoration.d,
                         0,
@@ -55,7 +55,7 @@ export default class CanvasManager{
                         decoration.w * 2,
                         decoration.h * 2);
                 }
-                else{
+                else {
                     ctx.save();
                     ctx.translate(canvas.width, 0);
                     ctx.scale(-1,1);

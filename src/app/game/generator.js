@@ -16,8 +16,6 @@ wedducfurfexnulluclennerlexrupnedlecrydlydfenwelnydhusrelrudneshesfetdesretdunle
 remlysfynwerrycsugnysnyllyndyndemluxfedsedbecmunlyrtesmudnytbyrsenwegfyrmurtelreptegpecnelnevfes`;
 var prefix = pre.match(/.{1,3}/g), suffix = suf.match(/.{1,3}/g);
 
-var 
-
 function createCocktail () {
     var id = (Math.random() * 65536 | 0) & 43690;
     return {
@@ -35,12 +33,12 @@ function createCustomer() {
         id,
         name: prefix[id >> 8] + suffix[id & 255],
         type: 'human'
-    }
+    };
 }
 
 export function createOrder() {
     return {
         customer: createCustomer(),
         cocktail: createCocktail()
-    }
+    };
 }

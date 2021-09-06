@@ -1,6 +1,6 @@
 import App from './app/app';
 import { attach } from './app/store';
-import { Game } from './app/game/game'
+import { Game } from './app/game/game';
 import CanvasManager from './app/canvas-manager';
 
 window.onload = () => {
@@ -16,7 +16,7 @@ window.onload = () => {
     attach(App, root);
 
     Game.start();
-}
+};
 
 // window.onkeypress = (evt) => {
 //     dispatch('KEY_PRESSED', evt.key);
@@ -24,7 +24,7 @@ window.onload = () => {
 
 window.idToName = (id) => {
     return id.replace('_',' ');
-}
+};
 
 //setInterval(()=>{dispatch('CHANGE_TIMER', (Math.random()*100).toFixed(2))}, 1000);
 //setInterval(()=>{dispatch('CHANGE_GOLD', parseInt(Math.random()*100))}, 1500);

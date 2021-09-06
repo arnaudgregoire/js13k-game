@@ -1,7 +1,7 @@
 import html from 'innerself/index';
 
 export default function Command(command, index) {
-    if(command){
+    if (command) {
         return html`
         <li style='color:${command.selected ? 'yellow': 'white'}'>
             <p>${command.customer.name}</p>
@@ -11,7 +11,7 @@ export default function Command(command, index) {
         </li>
     `;
     }
-    else{
+    else {
         return html``;
     }
 

@@ -1,4 +1,4 @@
-import { DECORATIONS, INGREDIENTS, SHAPES } from "./enum";
+import { DECORATIONS, INGREDIENTS, SHAPES } from './enum';
 
 const init = {
     timers: [],
@@ -7,9 +7,9 @@ const init = {
     sentence: '',
     ingredients: [],
     decorations: [],
-    shape:{},
+    shape: {},
     recipe: {},
-    controls:[]
+    controls: []
 };
 
 
@@ -45,7 +45,7 @@ export default function reducer(state = init, action, args) {
             ]
         });
     }
-    case 'REFRESH_TIMER':{
+    case 'REFRESH_TIMER': {
         const {commands} = state;
         const [timers] = args;
         const newCommands = [...commands];
@@ -57,16 +57,16 @@ export default function reducer(state = init, action, args) {
         });
     }
 
-    case 'ADD_ITEM':{
-       const [activeCommand] = args;
-       return Object.assign({}, state, {
+    case 'ADD_ITEM': {
+        const [activeCommand] = args;
+        return Object.assign({}, state, {
             shape: activeCommand.shape,
-            ingredients:activeCommand.ingredients,
-            decorations:activeCommand.decorations
+            ingredients: activeCommand.ingredients,
+            decorations: activeCommand.decorations
         });
     }
 
-    case 'NEXT_STEP':{
+    case 'NEXT_STEP': {
         const {commands} = state;
         const [activeCommand, index] = args;
         const newCommands = [...commands];
@@ -77,15 +77,15 @@ export default function reducer(state = init, action, args) {
         });
     }
 
-    case 'ACTIVATE_COMMAND':{
+    case 'ACTIVATE_COMMAND': {
         const {commands} = state;
         const [activeCommand] = args;
         const newCommands = [...commands];
-        newCommands.forEach(c=>{
+        newCommands.forEach(c => {
             c.selected = false;
         });
 
-        if(activeCommand.customer){
+        if (activeCommand.customer) {
             newCommands[newCommands.indexOf(activeCommand)].selected = true;
             return Object.assign({}, state, {
                 commands: newCommands,
@@ -99,14 +99,14 @@ export default function reducer(state = init, action, args) {
         }
     }
 
-    case 'RESET':{
+    case 'RESET': {
         return Object.assign({}, state, {
             sentence: '',
             ingredients: [],
             decorations: [],
-            shape:{},
+            shape: {},
             recipe: {},
-            controls:[]
+            controls: []
         });
     }
 
@@ -115,29 +115,29 @@ export default function reducer(state = init, action, args) {
     }
 }
 
-function getControls(step){
+function getControls(step) {
     let newControls = [];
     switch (step) {
-        case 0:
-            newControls = Object.keys(SHAPES);
-            break;
+    case 0:
+        newControls = Object.keys(SHAPES);
+        break;
         
-        case 1:
-            newControls = Object.keys(INGREDIENTS);
-            break;
+    case 1:
+        newControls = Object.keys(INGREDIENTS);
+        break;
     
-        case 2:
-            newControls = Object.keys(DECORATIONS);
-            break;
+    case 2:
+        newControls = Object.keys(DECORATIONS);
+        break;
 
-        case 3:
-            break;
+    case 3:
+        break;
 
-        case 4:
-            break;
+    case 4:
+        break;
 
-        default:
-            break;
+    default:
+        break;
     }
     return newControls;
 }
