@@ -40,7 +40,7 @@ const addDirectoryToArchive = (directory) => {
     if (fs.statSync(fullName).isDirectory()) {
       addDirectoryToArchive(fullName)
     } else {
-      archive.append(fs.createReadStream(fullName), { name: fullName.split('/').slice(2).join('/') })
+      archive.append(fs.createReadStream(fullName), { name: fullName.split(path.sep).slice(1).join(path.sep) })
     }
   })
 }
